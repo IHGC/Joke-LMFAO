@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Joke = require("../models/Joke");
+const List = require("../models/List");
 const axios = require("axios")
 const bcryptSalt = 10;
 
@@ -22,26 +23,31 @@ mongoose
 let users = [
   {
     username: "alice",
+    email:"alice@alice",
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt)),
   },
   {
     username: "bob",
+    email:"bob@bob",
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
   },
   {
     username: "carl",
+    email:"carl@carl",
     password: bcrypt.hashSync("carl", bcrypt.genSaltSync(bcryptSalt)),
   },
   {
     username: "dave",
+    email:"dave@dave",
     password: bcrypt.hashSync("dave", bcrypt.genSaltSync(bcryptSalt)),
   },
   {
     username: "edd",
+    email:"edd@edd",
     password: bcrypt.hashSync("edd", bcrypt.genSaltSync(bcryptSalt)),
   }
 ]
-// https://api.chucknorris.io/jokes/random
+let lists =[{title:"Lista 1",users:[]},{title:"Lista 2",users:[]}]
 User.deleteMany()
 .then(() => {
   User.collection.drop();
@@ -76,6 +82,26 @@ User.deleteMany()
 })
 .then((jokes) => {
   console.log(jokes);
+  return User.find()
+})
+.then((users)=>{
+  users.forEach((user,index)=>{
+    console.log(index,user,lists)
+    if(index==1)lists[0].ownerId=user._id
+    if(index==2)lists[1].ownerId=user._id
+    if(index<=2){
+      lists[0].users.push(user._id)
+    }
+    if(index>=2){
+      lists[1].users.push(user._id)
+    }
+  })
+  console.log(lists)
+  List.collection.drop();
+  return List.create(lists)
+})
+.then((lists)=>{
+  console.log(lists)
   // Close properly the connection to Mongoose
   mongoose.disconnect()
 })
