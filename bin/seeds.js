@@ -44,6 +44,7 @@ let users = [
 // https://api.chucknorris.io/jokes/random
 User.deleteMany()
 .then(() => {
+  User.collection.drop();
   return User.create(users)
 })
 .then(usersCreated => {
@@ -67,7 +68,7 @@ User.deleteMany()
   return Promise.all(usersJokes)
 })
 .then((jokesArr) => {
-  console.log("------------------------------")
+  Joke.collection.drop();
   let jokeDB=jokesArr.map(joke=>{
                 return Joke.create(joke)
               })
