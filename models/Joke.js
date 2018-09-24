@@ -4,7 +4,7 @@ const Schema   = mongoose.Schema;
 const jokeSchema = new Schema({
     body:String,
     rate:Number,
-    user:{
+    userId:{
         type: Schema.Types.ObjectId,
         ref:'users'
       }
@@ -15,5 +15,5 @@ const jokeSchema = new Schema({
   }
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Joke = mongoose.model('Joke', jokeSchema);
+module.exports = Joke;
