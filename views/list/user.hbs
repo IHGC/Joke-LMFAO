@@ -1,0 +1,22 @@
+Lists user
+<ul>
+  {{#each lists as |list|}}
+  <li>
+    {{list.title}}
+    {{list.ownerId.username}}
+    {{#if list.edit}}
+    <a href="/list/{{_id}}">Edit</a>
+    <form action="/list/{{_id}}/delete" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+    {{/if}}
+    <ul>
+      {{#each list.users as |user| }}
+      <li>
+        {{user.username}} {{user.id}}
+      </li>
+      {{/each}}
+    </ul>
+  </li>
+  {{/each}}
+</ul>

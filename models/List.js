@@ -7,7 +7,10 @@ const listSchema = new Schema({
       ref:'User'
     },
     title:String,
-    users:[]
+    users:[{
+      type:Schema.Types.ObjectId,
+      ref:'User'
+    }]
 }, {
   timestamps: {
     createdAt: 'created_at',
