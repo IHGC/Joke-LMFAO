@@ -24,34 +24,50 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
+  const username = req.body.username
   const password = req.body.password;
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+
+
+  if (email === "" || username === "" || password === "") {
+    res.render("auth/signup", { message: "Missing credentials" });
     return;
+  }
+  
+  if(username.indexOf("@")){
+    res.render("auth/signup",{message: "Invalid username"})
   }
 
   User.findOne({ username }, "username", (err, user) => {
+    console.log(user)
     if (user !== null) {
       res.render("auth/signup", { message: "The username already exists" });
       return;
     }
 
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
+    User.findOne({ email }, "email", (err, user) => {
+      if (user !== null) {
+        res.render("auth/signup", { message: "The email already exists" });
+        return;
+      }
 
-    const newUser = new User({
-      username,
-      password: hashPass
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
+
+      const newUser = new User({
+        username,
+        email,
+        password: hashPass
+      });
+
+      newUser.save()
+        .then(() => {
+          res.redirect("/");
+        })
+        .catch(err => {
+          res.render("auth/signup", { message: "Something went wrong" });
+        })
     });
-
-    newUser.save()
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
   });
 });
 
