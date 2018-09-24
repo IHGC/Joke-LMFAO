@@ -34,12 +34,11 @@ router.post("/signup", (req, res, next) => {
     return;
   }
   
-  if(username.indexOf("@")){
+  if(username.indexOf("@")>-1){
     res.render("auth/signup",{message: "Invalid username"})
   }
 
   User.findOne({ username }, "username", (err, user) => {
-    console.log(user)
     if (user !== null) {
       res.render("auth/signup", { message: "The username already exists" });
       return;
