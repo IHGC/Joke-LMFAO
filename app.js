@@ -91,5 +91,8 @@ app.use("/jokes",jokeRoutes)
 const listRoutes = require('./routes/list');
 app.use('/list', listRoutes);
 
+const followRoutes = require('./routes/follow');
+app.use('/', followRoutes);
+
 
 module.exports = app;

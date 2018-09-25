@@ -1,0 +1,13 @@
+{{#if following}}
+{{user.username}}, you are following to this users
+{{else}}
+{{user.username}}, you are followed by this users
+{{/if}}
+
+<ul>
+      {{#each users as |user| }}
+      <li>
+        {{user.username}} {{user.id}}
+      </li>
+      {{/each}}
+</ul>
