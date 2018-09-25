@@ -1,27 +1,31 @@
 <nav class="navbar navbar-expand navbar-light bg-light ">
-   <div id="mySidenav" class="sidenav">
-   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-   <div id="user">
-  <a href="/profile/{{user.id}}"><img src="{{user.image}}"></a>
-  <h3>{{user.username}}</h3>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div id="user">
+      <a href="/profile/{{user.id}}"><img src="{{user.image}}"></a>
+      <h3>{{user.username}}</h3>
+    </div>
+    <a href="/jokes/add">Añadir un chiste</a>
+    <a href="/list/">Listas</a>
+    <a href="/list/new">Añadir una lista</a>
+    <a href="/auth/logout">Log out</a>
   </div>
-  <a href="/jokes/add">Añadir un chiste</a>
-  <a href="/list/">Listas</a>
-  <a href="/list/new">Añadir una lista</a>
-  <a href="/auth/logout">Log out</a>
-</div>
   <div class="collapse navbar-collapse" id="navbarNav">
-  {{#if user}}
-   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
-     {{/if}}
-   </span>
-   <a class="navbar-brand" href="/">Joke LMFAO</a>
+    {{#if user}}
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+      {{/if}}
+    </span>
+    {{#if user}}
+    <a class="navbar-brand" href="/profile">Joke LMFAO</a>
+    {{else}}
+    <a class="navbar-brand" href="/">Joke LMFAO</a>
+    {{/if}}
     <ul class="navbar-nav ml-auto">
-       {{#if user}}
-       <li class="nav-item">
+      {{#if user}}
+      <li class="nav-item">
         <a class="nav-link active" href="/profile/{{user.id}}">Welcome {{user.username}}</a>
       </li>
-       <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" href="/auth/logout">Log out</a>
       </li>
       {{else}}
@@ -34,5 +38,5 @@
       {{/if}}
     </ul>
   </div>
- 
+
 </nav>

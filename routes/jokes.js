@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Joke = require("../models/Joke");
 const User = require("../models/User");
-const ensureLoggedIn = require("../middlewares/ensureLoggedIn")
+const {ensureLoggedIn} = require("../middlewares/ensureLoggedIn")
 
 router.get("/add",ensureLoggedIn("/"),(req, res) => {
     res.render("jokes/add")
@@ -17,6 +17,12 @@ router.post("/add", (req, res) => {
         .then(() => {
             res.redirect("/")
         })
+})
+
+router.get("/list",ensureLoggedIn("/"),(req,res)=>{
+    Joke.find({userId:req.user.id}).then(jokes=>{
+        res.render("jokes/list",{jokes})
+    })
 })
 
 
