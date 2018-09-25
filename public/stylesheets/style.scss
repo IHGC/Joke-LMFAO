@@ -20,8 +20,6 @@
     transition: 0.3s;
 }
 
-
-
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -38,11 +36,19 @@
 }
 
 img{
-    width:60%;
-    height:60%;
+    width:200px;
+    height:200px;
     object-fit: cover;
     border-radius:15%;
 }
+
+#profileImg{
+    width: 50px;
+    height:50px;
+    margin-left:10px;
+    margin-bottom:20px;
+}
+
 
 #user{
     text-align:center;
@@ -53,5 +59,25 @@ img{
 }
 
 .profile{
+    margin-top:1%;
     text-align:center;
+}
+.options a{
+    display:block;
+    margin:2.5%;
+}
+.row{
+    text-align:center;
+    margin-top:2.5%;
+}
+.blockquote{
+    border:1px solid grey;
+    padding:2.5%;
+}
+.auth a{
+    font-size:3vh;
+    margin:1%;
+}
+.auth{
+    margin-top:200px;
 }

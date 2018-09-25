@@ -1,8 +1,8 @@
-<div class="jumbotron col-sm-6">
-        <h1 class="display-5">Chistes más recientes!</h1>
-        {{#each jokes}}
-        <hr class="my-4">
-        <p>{{body}}</p>
-        <p>{{created_at}}</p>
-        {{/each}}
-    </div>
+<h1 class="display-5">Chistes más recientes!</h1>
+{{#each jokes}}
+<blockquote class="blockquote text-center">
+    <p class="mb-0">{{body}}</p>
+    <footer class="blockquote-footer">{{created_at}}</footer>
+</blockquote>
+{{/each}}
+</div>

@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
+
 <body>
   {{> _navbar}}
+  {{#if user}}
+  <div class="row">
+    <div class="col-md-2 profile">
+      <a href="/profile"><img src="{{user.image}}"></a>
+      <br><br>
+      <h3>{{user.username}}</h3>
+      <div class="options">
+      <a href="/jokes/list">Tus chistes</a>
+      <a href="/jokes/add">Añadir un chiste</a>
+      <a href="/list/">Listas</a>
+      <a href="/list/new">Añadir una lista</a>
+      <a href="/auth/logout">Log out</a>
+    </div>
+    </div>
+    
+    <div class="col-sm-6">
+      {{{body}}}
+    </div>
+  </div>
+  {{else}}
   {{{body}}}
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
+  {{/if}}
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-</script>
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
   <script src="/javascripts/script.js"></script>
 </body>
+
 </html>
