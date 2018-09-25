@@ -9,6 +9,7 @@ const User = require("../models/User");
 const Joke = require("../models/Joke");
 const List = require("../models/List");
 const Follow = require("../models/Follow");
+const FollowList = require("../models/FollowList");
 
 const axios = require("axios");
 const bcryptSalt = 10;
@@ -90,13 +91,12 @@ return User.deleteMany()
     return Promise.all(jokeDB);
   })
   .then(jokes => {
-    console.log(jokes);
+    console.log(`${jokes.length*jokes.length} jokes created`);
     return User.find();
   })
   .then(users => {
     
     users.forEach((user, index, users) => {
-      console.log(index, user, lists);
       if (index == 1) {
         lists[0].ownerId = user._id;
       }
@@ -120,12 +120,34 @@ return User.deleteMany()
     return List.create(lists);
   })
   .then(lists => {
-    console.log(follows);
+    console.log(`${lists.length} lists created`);
     Follow.collection.drop();
     return Follow.create(follows);
   })
   .then((follows) => {
-    console.log(follows)
+    console.log(`${follows.length} follows created`);
+    FollowList.collection.drop();
+    return Promise.all([User.find(),List.find()])
+  })
+  .then(arr=>{
+    const [users,lists]=arr
+    const followLists=[{
+                followerId:users[0].id,
+                followedListId:lists[0].id
+              },{
+                followerId:users[1].id,
+                followedListId:lists[0].id
+              },{
+                followerId:users[2].id,
+                followedListId:lists[1].id
+              },{
+                followerId:users[3].id,
+                followedListId:lists[1].id
+              }]
+    return FollowList.create(followLists)
+  })
+  .then(followLists=>{
+    console.log(`${followLists.length} followLists created`)
     // Close properly the connection to Mongoose
     mongoose.disconnect();
   })
