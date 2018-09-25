@@ -1,2 +1,12 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
+<div class="jumbotron col-sm-6">
+    <h1 class="display-5">Chistes más recientes!</h1>
+    {{#each jokes}}
+    <hr class="my-4">
+    <a href="/profile/{{userId.id}}">{{userId.username}}</a>
+    <p>{{body}}</p>
+    <p>{{created_at}}</p>
+    {{/each}}
+</div>
+
+

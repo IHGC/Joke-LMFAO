@@ -47,6 +47,7 @@ let users = [
     password: bcrypt.hashSync("edd", bcrypt.genSaltSync(bcryptSalt)),
   }
 ]
+
 let lists =[{title:"Lista 1",users:[]},{title:"Lista 2",users:[]}]
 User.deleteMany()
 .then(() => {
@@ -76,7 +77,7 @@ User.deleteMany()
 .then((jokesArr) => {
   Joke.collection.drop();
   let jokeDB=jokesArr.map(joke=>{
-                return Joke.create(joke)
+                return Joke.create(joke) 
               })
   return Promise.all(jokeDB)
 })

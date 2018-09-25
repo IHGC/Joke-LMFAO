@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-4 profile">
+        <img src="{{us.image}}">
+        <br><br>
+        <h3>{{us.username}}</h3>
+    </div>
+    <div class="jumbotron col-sm-6">
+        <h1 class="display-5">Chistes</h1>
+        {{#if jokes}}
+        {{#each jokes}}
+        <hr class="my-6">
+        <p>{{body}}</p>
+        <p>{{created_at}}</p>
+
+        {{#if ../isOwner}}
+
+        <a href="/jokes/edit/{{_id}}">Editar</a>
+        -
+        <a href="/jokes/delete/{{_id}}">Borrar</a>
+
+        {{/if}}
+
+        {{/each}}
+        {{else}}
+        <p>Aún no subiste chistes!</p>
+        {{/if}}
+    </div>
+</div>
