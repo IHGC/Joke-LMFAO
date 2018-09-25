@@ -6,7 +6,7 @@ const jokeSchema = new Schema({
     rate:Number,
     userId:{
         type: Schema.Types.ObjectId,
-        ref:'users'
+        ref:'User'
       }
 }, {
   timestamps: {

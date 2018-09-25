@@ -1,0 +1,20 @@
+
+{{#if jokes}}
+{{#each jokes}}
+<div>
+    <div>
+    <p>{{userId.username}}</p>
+    <p>{{body}}</p>
+    <p>{{created_at}}</p>
+    </div>
+
+    <a href="/jokes/edit/{{_id}}">Editar</a>
+    -
+    <a href="/jokes/delete/{{_id}}">Borrar</a>
+
+    <br><br>
+</div>
+{{/each}}
+{{else}}
+<p>Sube chistes!</p>
+{{/if}}
