@@ -4,10 +4,7 @@
 </div>
 {{#if jokes}}
 {{#each jokes}}
-<blockquote class="blockquote text-center">
-    <p class="mb-0">{{body}}</p>
-    <footer class="blockquote-footer">{{created_at}}</footer>
-</blockquote>
+{{> _jokesList}}
 {{/each}}
 {{else}}
 <p>Aún no tiene chistes</p>

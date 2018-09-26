@@ -4,6 +4,8 @@ const Joke = require("../models/Joke")
 const User = require("../models/User")
 const Follow = require ("../models/Follow")
 const {ensureLoggedOut} = require ("../middlewares/ensureLoggedIn")
+const isRatedByUser = require("../middlewares/helpers")
+
 
 /* GET home page */
 router.get('/', ensureLoggedOut("/profile"),(req, res, next) => {
@@ -25,15 +27,8 @@ router.get("/profile", (req,res)=>{
         arr.push({ userId: e.followedId })
       })
       Joke.find({ $or: arr }).populate("userId").then(jokes => {
-        for(let i=0;i<jokes.length;i++){
-          for(let j=0;j<jokes[i].rates.length;j++){
-            if(jokes[i].rates[j].userId==user.id){
-              jokes[i].isRated=jokes[i].rates[j].rate
-            }
-          }
-        }
-        res.render("profile", { jokes })
-
+        jokes=isRatedByUser(jokes,user.id)
+        res.render("profile", {jokes})
       })
     }
   })
@@ -44,6 +39,7 @@ router.get("/profile/:id",(req,res)=>{
   .then(jokes=>{
     User.findById(req.params.id)
     .then(us=>{
+      jokes=isRatedByUser(jokes,user.id)
       res.render("profileId",{jokes,us})
     })
   })
