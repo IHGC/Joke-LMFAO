@@ -97,5 +97,8 @@ app.use('/', followRoutes);
 const rateRoutes = require('./routes/rate');
 app.use('/rate', rateRoutes);
 
+const searchRoutes = require('./routes/search');
+app.use('/search', searchRoutes);
+
 
 module.exports = app;
