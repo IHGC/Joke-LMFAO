@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Joke = require("../models/Joke");
 const User = require("../models/User");
-const { isRatedByUser, addMarkTag } = require("../middlewares/helpers");
+const { isRatedByUser, addMarkTag,isOwner } = require("../middlewares/helpers");
 router.post("/", (req, res, next) => {
   const { search } = req.body;
   User.find({ username: { $regex: `.*${search}.*` } })
@@ -18,8 +18,15 @@ router.post("/", (req, res, next) => {
     })
     .populate("userId")
     .then(jokes => {
-      jokes=addMarkTag(jokes,search)
+      if(req.user){
+        console.log(req.user.id)
+        console.log(isOwner(jokes,req.user.id))
+        jokes=isRatedByUser(jokes,req.user.id)
+        jokes=isOwner(jokes,req.user.id)
+      }
       // console.log(jokes)
+      jokes=addMarkTag(jokes,search)
+
       res.render("search", { jokes, search });
     });
   })

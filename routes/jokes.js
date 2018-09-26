@@ -3,6 +3,8 @@ const router = express.Router();
 const Joke = require("../models/Joke");
 const User = require("../models/User");
 const {ensureLoggedIn} = require("../middlewares/ensureLoggedIn")
+const {isOwner} = require("../middlewares/helpers")
+
 
 router.get("/add",ensureLoggedIn("/"),(req, res) => {
     res.render("jokes/add")
@@ -21,6 +23,7 @@ router.post("/add", (req, res) => {
 
 router.get("/list",ensureLoggedIn("/"),(req,res)=>{
     Joke.find({userId:req.user.id}).then(jokes=>{
+        jokes=isOwner(jokes,req.user.id)
         res.render("jokes/list",{jokes})
     })
 })
