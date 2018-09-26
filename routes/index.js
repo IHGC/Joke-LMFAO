@@ -25,6 +25,13 @@ router.get("/profile", (req,res)=>{
         arr.push({ userId: e.followedId })
       })
       Joke.find({ $or: arr }).populate("userId").then(jokes => {
+        for(let i=0;i<jokes.length;i++){
+          for(let j=0;j<jokes[i].rates.length;j++){
+            if(jokes[i].rates[j].userId==user.id){
+              jokes[i].isRated=jokes[i].rates[j].rate
+            }
+          }
+        }
         res.render("profile", { jokes })
 
       })
