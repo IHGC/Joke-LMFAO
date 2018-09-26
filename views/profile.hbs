@@ -4,6 +4,21 @@
 <blockquote class="blockquote text-center">
     <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{userId.id}}">{{userId.username}}</a></h3>
     <p class="mb-0">{{body}}</p>
+    <p class="mb-0">
+        {{#if rates}}
+                {{rateAvg}}
+            {{else}}
+                Sin puntuar
+            {{/if}}
+            {{#if isRated}}
+            {{isRated}}
+            {{else}}
+                <form action="/rate/{{id}}" method="POST">
+                <input type="number" name="rate" value="1" min="1" max="5">
+                <button type="submit">Rate it</button>
+                </form>
+            {{/if}}
+    </p>
     <footer class="blockquote-footer">{{created_at}}</footer>
 </blockquote>
 {{/each}}

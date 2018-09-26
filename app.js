@@ -94,5 +94,8 @@ app.use('/list', listRoutes);
 const followRoutes = require('./routes/follow');
 app.use('/', followRoutes);
 
+const rateRoutes = require('./routes/rate');
+app.use('/rate', rateRoutes);
+
 
 module.exports = app;

@@ -3,7 +3,16 @@ const Schema   = mongoose.Schema;
 
 const jokeSchema = new Schema({
     body:String,
-    rate:Number,
+    rateAvg: { type: Number, default: 0 },
+    rates: [
+      {
+        userId: {
+          type: Schema.Types.ObjectId,
+          ref: "User"
+        },
+        rate: Number
+      }
+    ],
     userId:{
         type: Schema.Types.ObjectId,
         ref:'User'
