@@ -4,6 +4,7 @@ const Follow = require("../models/Follow");
 const FollowList = require("../models/FollowList");
 
 /* GET home page */
+// lista a quien sigues
 router.get("/following", (req, res, next) => {
   Follow.find({ followerId: req.user.id })
     .populate("followedId")
@@ -13,6 +14,7 @@ router.get("/following", (req, res, next) => {
     })
     .catch(e => next(e));
 });
+//lista quien sigue a :id
 router.get("/following/:id", (req, res, next) => {
   Follow.find({ followerId: req.body.id })
     .populate("followedId","followerId")
@@ -22,6 +24,7 @@ router.get("/following/:id", (req, res, next) => {
     })
     .catch(e => next(e));
 });
+//lista quien te sigue
 router.get("/followed", (req, res, next) => {
   Follow.find({ followedId: req.user.id })
     .populate("followerId")
@@ -31,6 +34,7 @@ router.get("/followed", (req, res, next) => {
     })
     .catch(e => next(e));
 });
+// Lista quien sigue a id
 router.get("/followed/:id", (req, res, next) => {
   Follow.find({ followedId: req.body.id })
     .populate("followerId","followerId")
@@ -40,6 +44,24 @@ router.get("/followed/:id", (req, res, next) => {
     })
     .catch(e => next(e));
 });
+
+router.get("/follow/:id",(req,res,next)=>{
+  const followedId=req.params.id
+  const followerId=req.user.id
+  Follow.create({followerId,followedId})
+  .then((f)=>{
+    res.redirect('/following')
+  }).catch(e=>next(e))
+})
+
+router.get("/follow/:id/delete",(req,res,next)=>{
+  const followedId=req.params.id
+  const followerId=req.user.id
+  Follow.findOneAndDelete({$and:[{followerId},{followedId}]})
+  .then(()=>{
+    res.redirect('/following')
+  }).catch(e=>next(e))
+})
 
 
 module.exports = router;
