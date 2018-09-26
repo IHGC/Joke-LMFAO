@@ -1,5 +1,7 @@
-<h1 class="display-5">Tus chistes</h1>
+
+
+{{#if jokes}}
 {{#each jokes}}
 {{> _jokesList joke=this user=../user}}
 {{/each}}
-</div>
+{{/if}}

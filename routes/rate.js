@@ -19,7 +19,7 @@ router.post("/:id", (req, res, next) => {
       let rateAvg=tot/(joke.rates.length+1)
       console.log(rateAvg)
       Joke.findOneAndUpdate({_id:jokeId},{rateAvg})
-      .then(()=>res.redirect('/profile'))
+      .then(()=>res.redirect(req.get('referer')))
       .catch(e => next(e));
     })
     .catch(e => next(e));

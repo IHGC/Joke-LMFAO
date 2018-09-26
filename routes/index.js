@@ -39,10 +39,37 @@ router.get("/profile/:id",(req,res)=>{
   .then(jokes=>{
     User.findById(req.params.id)
     .then(us=>{
-      jokes=isRatedByUser(jokes,user.id)
-      res.render("profileId",{jokes,us})
+      Follow.find({followerId: req.params.id})
+      .then(following=>{
+        Follow.find({followedId:req.params.id})
+        .then(followers=>{
+          Follow.find({$and:[{followerId:req.user.id},{followedId:req.params.id}]})
+          .then(checkFollow=>{
+            let check=false;
+            if(checkFollow.length==0){
+              check=true;
+            }
+            if(req.user){
+              jokes=isRatedByUser(jokes,req.user.id)
+            }
+            res.render("profileId",{jokes,us,followers,following,check})
+          })
+        })
+      })
     })
   })
 })
+
+router.get("/explore",(req,res)=>{
+  user=req.user
+  Joke.find().sort({created_at:-1}).populate("userId")
+  .then(jokes=>{
+    jokes=isRatedByUser(jokes,user.id)
+    res.render("explore",{jokes})
+  })
+});
+
+
+
 
 module.exports = router;

@@ -12,7 +12,7 @@ const isRatedByUser = (jokes,userId) =>{
   const isOwner = (jokes,userid) =>{
     for(let i=0;i<jokes.length;i++){
       if(jokes[i].userId==userid){
-        jokes[i].isowner=true;
+        jokes[i].isOwner=true;
       }
     }
     return jokes

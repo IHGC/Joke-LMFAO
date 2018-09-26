@@ -20,7 +20,7 @@ router.get("/following/:id", (req, res, next) => {
     .populate("followedId","followerId")
     .then(users => {
       users = users.map(u => u.followedId);
-      res.render("follow", { following: true, users,user:users[0].followerId });
+      res.render("follow/following", { following: true, users});
     })
     .catch(e => next(e));
 });
@@ -50,7 +50,7 @@ router.get("/follow/:id",(req,res,next)=>{
   const followerId=req.user.id
   Follow.create({followerId,followedId})
   .then((f)=>{
-    res.redirect('/following')
+    res.redirect(req.get('referer'));
   }).catch(e=>next(e))
 })
 
@@ -59,7 +59,7 @@ router.get("/follow/:id/delete",(req,res,next)=>{
   const followerId=req.user.id
   Follow.findOneAndDelete({$and:[{followerId},{followedId}]})
   .then(()=>{
-    res.redirect('/following')
+    res.redirect(req.get('referer'));
   }).catch(e=>next(e))
 })
 

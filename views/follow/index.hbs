@@ -1,13 +1,14 @@
 {{#if following}}
-{{user.username}}, you are following to this users
+{{user.username}}, sigues a {{users.length}} usuarios
 {{else}}
-{{user.username}}, you are followed by this users
+{{user.username}}, te siguen {{users.length}} usuarios
 {{/if}}
 
-<ul>
-      {{#each users as |user| }}
-      <li>
-        {{user.username}} {{user.id}}
-      </li>
-      {{/each}}
-</ul>
+
+{{#each users as |user| }}
+<blockquote class="blockquote text-center">
+  <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{user.id}}">{{user.username}}</a></h3>
+</blockquote>
+{{/each}}
+
+
