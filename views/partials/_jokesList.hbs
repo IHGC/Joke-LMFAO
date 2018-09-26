@@ -3,24 +3,26 @@
     <p class="mb-0">{{body}}</p>
     <p class="mb-0">
         {{#if rates}}
-        {{rateAvg}}
+            {{rateAvg}}
         {{else}}
-        Sin puntuar
+            Sin puntuar
         {{/if}}
         {{#if isRated}}
-        {{isRated}}
+            {{isRated}}
         {{else}}
-        {{#unless isowner}}
-        <form action="/rate/{{id}}" method="POST">
-            <input type="number" name="rate" value="1" min="1" max="5">
-            <button type="submit">Rate it</button>
-        </form>
-        {{/unless}}
+            {{#unless isowner}}
+                {{#if user}}
+                    <form action="/rate/{{id}}" method="POST">
+                        <input type="number" name="rate" value="1" min="1" max="5">
+                        <button type="submit">Rate it</button>
+                    </form>
+                {{/if)}}
+            {{/unless}}
         {{/if}}
         {{#if isowner}}
-        <a href="/jokes/edit/{{_id}}">Edit</a>
-        -
-        <a href="/jokes/delete/{{_id}}">Delete</a>
+            <a href="/jokes/edit/{{_id}}">Edit</a>
+            -
+            <a href="/jokes/delete/{{_id}}">Delete</a>
         {{/if}}
     </p>
     <footer class="blockquote-footer">{{created_at}}</footer>
