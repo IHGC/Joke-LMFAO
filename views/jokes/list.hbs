@@ -1,8 +1,11 @@
-<h1 class="display-5">Chistes más recientes!</h1>
+<h1 class="display-5">Tus chistes</h1>
 {{#each jokes}}
 <blockquote class="blockquote text-center">
     <p class="mb-0">{{body}}</p>
     <footer class="blockquote-footer">{{created_at}}</footer>
+    <a href="/jokes/edit/{{_id}}">Edit</a>
+    -
+    <a href="/jokes/delete/{{_id}}">Delete</a>
 </blockquote>
 {{/each}}
 </div>

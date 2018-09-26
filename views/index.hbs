@@ -4,13 +4,14 @@
         <br>
         <a class="btn btn-primary" href="/auth/signup">Register</a>
     </div>
-    <div class="jumbotron col-sm-6">
+    <div class="col-sm-6">
         <h1 class="display-5">Chistes más recientes!</h1>
         {{#each jokes}}
-        <hr class="my-4">
-        <a href="/profile/{{userId.id}}">{{userId.username}}</a>
-        <p>{{body}}</p>
-        <p>{{created_at}}</p>
+        <blockquote class="blockquote text-center">
+            <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{userId.id}}">{{userId.username}}</a></h3>
+            <p class="mb-0">{{body}}</p>
+            <footer class="blockquote-footer">{{created_at}}</footer>
+        </blockquote>
         {{/each}}
     </div>
 </div>
