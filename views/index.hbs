@@ -1,17 +1,8 @@
-<div class="row">
-    <div class="col-md-4 auth">
-        <a class="btn btn-primary" href="/auth/login">Log in</a>
-        <br>
-        <a class="btn btn-primary" href="/auth/signup">Register</a>
-    </div>
-    <div class="col-sm-6">
-        <h1 class="display-5">Chistes más recientes!</h1>
-        {{#each jokes}}
-        <blockquote class="blockquote text-center">
-            <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{userId.id}}">{{userId.username}}</a></h3>
-            <p class="mb-0">{{body}}</p>
-            <footer class="blockquote-footer">{{created_at}}</footer>
-        </blockquote>
-        {{/each}}
-    </div>
-</div>
+<h1 class="display-5">Chistes más recientes!</h1>
+{{#each jokes}}
+<blockquote class="blockquote text-center">
+    <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{userId.id}}">{{userId.username}}</a></h3>
+    <p class="mb-0">{{body}}</p>
+    <footer class="blockquote-footer">{{created_at}}</footer>
+</blockquote>
+{{/each}}

@@ -6,6 +6,12 @@
     <a class="navbar-brand" href="/">Joke LMFAO</a>
     {{/if}}
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <form action="/search" method="POST">
+          <input type="search" name="search" placeholder="Search">
+          <button type="submit">Search</button>
+        </form>
+      </li>
       {{#if user}}
       <li class="nav-item">
         <a class="nav-link active" href="/profile">Welcome {{user.username}}</a>
