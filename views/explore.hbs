@@ -1,5 +1,8 @@
-
-
+{{#if ranking}}
+<h3>Top 10!</h3>
+{{else}}
+<h3>Explora y valora!!</h3>
+{{/if}}
 {{#if jokes}}
 {{#each jokes}}
 {{> _jokesList joke=this user=../user}}

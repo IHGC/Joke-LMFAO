@@ -7,11 +7,6 @@
     <div class="col-sm-6">
         <h1 class="display-5">Chistes</h1>
         {{#each jokes}}
-        <blockquote class="blockquote text-center">
-            <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{userId.id}}">{{userId.username}}</a></h3>
-            <p class="mb-0">{{body}}</p>
-            <footer class="blockquote-footer">{{created_at}}</footer>
-        </blockquote>
+        {{> _jokesUnlogged}}
         {{/each}}
-    </div>
 </div>
