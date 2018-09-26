@@ -4,7 +4,7 @@ const Joke = require("../models/Joke")
 const User = require("../models/User")
 const Follow = require ("../models/Follow")
 const {ensureLoggedOut} = require ("../middlewares/ensureLoggedIn")
-const isRatedByUser = require("../middlewares/helpers")
+const {isRatedByUser} = require("../middlewares/helpers")
 
 
 /* GET home page */
