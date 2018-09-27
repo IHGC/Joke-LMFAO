@@ -17,7 +17,7 @@
 
 {{#if jokes}}
 {{#each jokes}}
-{{#if user}}
+{{#if ../user}}
 {{> _jokesList joke=this user=../user}}
 {{else}}
 {{> _jokesUnlogged}}
