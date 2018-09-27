@@ -63,5 +63,23 @@ router.get("/follow/:id/delete",(req,res,next)=>{
   }).catch(e=>next(e))
 })
 
+router.get("/followList/:id",(req,res,next)=>{
+  const followedListId=req.params.id
+  const followerId=req.user.id
+  FollowList.create({followerId,followedListId})
+  .then((f)=>{
+    res.redirect('/list')
+  }).catch(e=>next(e))
+})
+
+router.get("/followList/:id/delete",(req,res,next)=>{
+  const followedListId=req.params.id
+  const followerId=req.user.id
+  FollowList.findOneAndDelete({$and:[{followerId},{followedListId}]})
+  .then(()=>{
+    res.redirect('/list')
+  }).catch(e=>next(e))
+})
+
 
 module.exports = router;
