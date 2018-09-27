@@ -1,3 +1,4 @@
+require('dotenv').config();
 // Seeds file that remove all users and create 2 new users
 
 // To execute this seed, run from the root of the project
@@ -16,7 +17,7 @@ const bcryptSalt = 10;
 
 mongoose
   .connect(
-    "mongodb://localhost/project2",
+    process.env.URL_DB,
     { useNewUrlParser: true }
   )
   .then(x => {
