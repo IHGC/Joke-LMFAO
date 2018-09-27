@@ -12,13 +12,13 @@
           <button type="submit">Search</button>
         </form>
       </li>
-      {{#if user}}
       <li class="nav-item">
       <a class="nav-link active" href="/ranking">Top 10</a>
       </li>
       <li class="nav-item">
       <a class="nav-link active" href="/explore">Explorar chistes</a>
       </li>
+       {{#if user}}
       <li class="nav-item">
         <a class="nav-link active" href="/profile">Welcome {{user.username}}</a>
       </li>

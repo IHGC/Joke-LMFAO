@@ -73,6 +73,7 @@ img{
 .blockquote{
     border:1px solid grey;
     padding:2.5%;
+    text-align: initial;
 }
 .auth a{
     font-size:3vh;
@@ -83,4 +84,12 @@ img{
 }
 u{
     background-color: yellow;
+}
+#imglist{
+    width:50px;
+    height:50px;
+}
+
+.mb-0{
+    display:inline-block;
 }

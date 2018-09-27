@@ -14,14 +14,9 @@
 
 <p style="display:inline">Seguidores:{{followers.length}}</p>
 </div>
-
 {{#if jokes}}
 {{#each jokes}}
-{{#if ../user}}
 {{> _jokesList joke=this user=../user}}
-{{else}}
-{{> _jokesUnlogged}}
-{{/if}}
 {{/each}}
 {{else}}
 <p>Aún no tiene chistes</p>
