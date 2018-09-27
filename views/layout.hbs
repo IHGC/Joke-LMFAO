@@ -13,41 +13,19 @@
 
 <body>
   {{> _navbar}}
-  {{#if user}}
   <div class="row">
-    <div class="col-md-2 profile">
-      <a href="/profile"><img src="{{user.image}}"></a>
-      <br><br>
-      <h3>{{user.username}}</h3>
-      <a href="/profile/edit">Edit</a>
-      <div class="options">
-      <a href="/jokes/list">Tus chistes</a>
-      <a href="/jokes/add">Añadir un chiste</a>
-      <a href="/list/">Listas</a>
-      <a href="/list/new">Añadir una lista</a>
-      <a href="/followed">Seguidores</a>
-      <a href="/following">Seguidos</a>
-      <a href="/auth/logout">Log out</a>
+    <div class="col-sm-2">
+     {{#if user}}
+    {{> _profile}}
+    {{else}}
+    {{> _presentation}}
+    {{/if}}
     </div>
-    </div>
-    
     <div class="col-sm-6">
       {{{body}}}
     </div>
   </div>
-  {{else}}
-  {{{body}}}
-  {{/if}}
   
-  <script>
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-  </script>
   <script src="/javascripts/script.js"></script>
 </body>
 
