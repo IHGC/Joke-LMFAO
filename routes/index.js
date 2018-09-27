@@ -5,6 +5,7 @@ const User = require("../models/User")
 const Follow = require ("../models/Follow")
 const {ensureLoggedOut} = require ("../middlewares/ensureLoggedIn")
 const {isRatedByUser} = require("../middlewares/helpers")
+const uploadCloud = require('../config/cloudinary.js');
 
 
 /* GET home page */
