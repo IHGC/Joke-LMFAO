@@ -1,0 +1,17 @@
+{{#if message}}
+  <p>{{message}}</p>
+{{/if}}
+<form action="/profile/edit" method="POST" enctype="multipart/form-data">
+  <label for="name">Username: </label>
+  <input type="text" name="username" value="{{user.username}}" required>
+  <label for="email">Email: </label>
+  <input type="email" name="email" value="{{user.email}}" required>
+  <label for="oldPassword">Old Password: </label>
+  <input type="password" name="oldPassword" placeholder="Old Password">
+  <label for="password">Password: </label>
+  <input type="password" name="password" placeholder="Password">
+  <label for="password2">Password: </label>
+  <input type="password" name="password2" placeholder="Repeat your password">
+  <input type="file" name="image" >
+  <button type="submit">Save</button>
+</form>
