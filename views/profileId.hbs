@@ -1,12 +1,29 @@
 <div class="profile">
-<h1 style="display:inline" class="display-5">Chistes de {{us.username}}</h1>
+{{#if user}}
+{{#if check}}
+<a href="/follow/{{us.id}}">Seguir</a>
+{{else}}
+<a href="/follow/{{us.id}}/delete">Dejar Seguir</a>
+{{/if}}
+{{/if}}
+<h3 style="display:inline">{{us.username}}</h3>
 <img id="profileImg" src="{{us.image}}">
+<p style="display:inline">Seguidos:{{following.length}}</p>
+
+-
+
+<p style="display:inline">Seguidores:{{followers.length}}</p>
 </div>
+
 {{#if jokes}}
 {{#each jokes}}
-{{> _jokesList}}
+{{#if ../user}}
+{{> _jokesList joke=this user=../user}}
+{{else}}
+{{> _jokesUnlogged}}
+{{/if}}
 {{/each}}
 {{else}}
 <p>Aún no tiene chistes</p>
 {{/if}}
-  
+

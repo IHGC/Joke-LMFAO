@@ -13,30 +13,32 @@
 
 <body>
   {{> _navbar}}
+  {{#if user}}
   <div class="row">
     <div class="col-md-2 profile">
-  {{#if user}}
       <a href="/profile"><img src="{{user.image}}"></a>
       <br><br>
       <h3>{{user.username}}</h3>
+      <a href="/profile/edit">Edit</a>
       <div class="options">
-        <a href="/jokes/list">Tus chistes</a>
-        <a href="/jokes/add">Añadir un chiste</a>
-        <a href="/list/">Listas</a>
-        <a href="/list/new">Añadir una lista</a>
-        <a href="/auth/logout">Log out</a>
-      </div>
-  {{else}}
-        <a class="btn btn-primary" href="/auth/login">Log in</a>
-        <br>
-        <a class="btn btn-primary" href="/auth/signup">Register</a>
-  {{/if}}
+      <a href="/jokes/list">Tus chistes</a>
+      <a href="/jokes/add">Añadir un chiste</a>
+      <a href="/list/">Listas</a>
+      <a href="/list/new">Añadir una lista</a>
+      <a href="/followed">Seguidores</a>
+      <a href="/following">Seguidos</a>
+      <a href="/auth/logout">Log out</a>
+    </div>
     </div>
     
     <div class="col-sm-6">
       {{{body}}}
     </div>
   </div>
+  {{else}}
+  {{{body}}}
+  {{/if}}
+  
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";

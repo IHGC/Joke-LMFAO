@@ -1,8 +1,9 @@
 <h1 class="display-5">Chistes más recientes!</h1>
 {{#if jokes}}
 {{#each jokes}}
-{{> _jokesList}}
+{{> _jokesList joke=this user=../user}}
 {{/each}}
 {{else}}
 <p>Comienza a seguir a gente para ver chistes!</p>
 {{/if}}
+
