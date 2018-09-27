@@ -1,16 +1,20 @@
-<blockquote class="blockquote text-center">
-    {{#if joke.userId.id}}
+<blockquote class="blockquote">
+    {{#if joke.userId.username}}
+    <div>
+    <img id="imglist" src="{{joke.userId.image}}">
     <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{joke.userId.id}}">{{{joke.userId.username}}}</a></h3>
+    <p class="mb-0">{{joke.created_at}}</p>
+    </div>
     {{/if}}
     <p class="mb-0">{{{joke.body}}}</p>
     <p class="mb-0">
         {{#if joke.rates}}
-            {{joke.rateAvg}}
+            <p style="text-align:center">{{joke.rateAvg}}</p>
         {{else}}
-            Sin puntuar
+           <p style="text-align:center">Sin puntuar</p> 
         {{/if}}
         {{#if joke.isRated}}
-            {{joke.isRated}}
+           <p style="text-align:center">{{joke.isRated}}</p> 
         {{else}}
             {{#unless joke.isOwner}}
                 {{#if user}}
@@ -28,5 +32,4 @@
             <a href="/jokes/delete/{{joke._id}}">Delete</a>
         {{/if}}
     </p>
-    <footer class="blockquote-footer">{{joke.created_at}}</footer>
 </blockquote>
