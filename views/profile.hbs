@@ -1,20 +1,9 @@
-<div class="row">
-    <div class="col-md-4 profile">
-       <img src="{{user.image}}">
-        <br><br>
-        <h3>{{user.username}}</h3>
-    </div>
-    <div class="jumbotron col-sm-6">
-        <h1 class="display-5">Chistes más recientes!</h1>
-        {{#if jokes}}
-        {{#each jokes}}
-        <hr class="my-4">
-        <a href="/profile/{{userId.id}}">{{userId.username}}</a>
-        <p>{{body}}</p>
-        <p>{{created_at}}</p>
-        {{/each}}
-        {{else}}
-        
-        {{/if}}
-    </div>
-</div>
+<h1 class="display-5">Chistes más recientes!</h1>
+{{#if jokes}}
+{{#each jokes}}
+{{> _jokesList joke=this user=../user}}
+{{/each}}
+{{else}}
+<p>Comienza a seguir a gente para ver chistes!</p>
+{{/if}}
+

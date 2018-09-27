@@ -1,16 +1,12 @@
 <div class="row">
-    <div class="col-md-4 profile">
-        <a class="nav-link" href="/auth/login">Log in</a>
+    <div class="col-md-4 auth">
+        <a class="btn btn-primary" href="/auth/login">Log in</a>
         <br>
-        <a class="nav-link" href="/auth/signup">Register</a>
+        <a class="btn btn-primary" href="/auth/signup">Register</a>
     </div>
-    <div class="jumbotron col-sm-6">
-        <h1 class="display-5">Chistes más recientes!</h1>
+    <div class="col-sm-6">
+        <h1 class="display-5">Chistes</h1>
         {{#each jokes}}
-        <hr class="my-4">
-        <a href="/profile/{{userId.id}}">{{userId.username}}</a>
-        <p>{{body}}</p>
-        <p>{{created_at}}</p>
+        {{> _jokesUnlogged}}
         {{/each}}
-    </div>
 </div>

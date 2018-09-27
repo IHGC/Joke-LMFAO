@@ -74,10 +74,12 @@ app.use(session({
 app.use(flash());
 require('./passport')(app);
 
+
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
+
 
 const index = require('./routes/index');
 app.use('/', index);
@@ -93,6 +95,12 @@ app.use('/list', listRoutes);
 
 const followRoutes = require('./routes/follow');
 app.use('/', followRoutes);
+
+const rateRoutes = require('./routes/rate');
+app.use('/rate', rateRoutes);
+
+const searchRoutes = require('./routes/search');
+app.use('/search', searchRoutes);
 
 
 module.exports = app;
