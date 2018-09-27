@@ -9,15 +9,12 @@ router.post("/:id", (req, res, next) => {
   console.log("prueba",{rates:{$push:{userId,rate}}})
   Joke.findOneAndUpdate({_id:jokeId},{$push:{rates:{rate,userId}}})
     .then(joke => {
-      console.log("joke",joke.rates)
       let tot=rate
       for(let i=0;i<joke.rates.length;i++){
-        console.log("rate",i,joke.rates[i].rate)
         tot+=parseInt(joke.rates[i].rate)
       }
-      console.log(tot,joke.rates.length+1)
-      let rateAvg=tot/(joke.rates.length+1)
-      console.log(rateAvg)
+      let rateAvg=(tot/(joke.rates.length+1)).toFixed(2)
+      
       Joke.findOneAndUpdate({_id:jokeId},{rateAvg})
       .then(()=>res.redirect(req.get('referer')))
       .catch(e => next(e));
