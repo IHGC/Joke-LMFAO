@@ -24,7 +24,8 @@ const addMarkTag = (jokes, search) => {
 
 const isOwner = (jokes, userId) => {
   for (let i = 0; i < jokes.length; i++) {
-    if (jokes[i].userId == userId) {
+    let jokeId=(jokes[i].userId.username)?jokes[i].userId.id:jokes[i].userId
+    if (jokeId == userId) {
       jokes[i].isOwner = true;
     }
   }
