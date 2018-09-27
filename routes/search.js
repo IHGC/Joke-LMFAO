@@ -5,7 +5,7 @@ const User = require("../models/User");
 const { isRatedByUser, addMarkTag,isOwner } = require("../middlewares/helpers");
 router.post("/", (req, res, next) => {
   const { search } = req.body;
-  User.find({ username: { $regex: `.*${search}.*` } })
+  User.find({ username: { $regex: `.*${search}.*`,$options:'i' } })
   .then(users=>{
     let userNames=users.map(user=>{
       return {userId:user._id}
