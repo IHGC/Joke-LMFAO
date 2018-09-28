@@ -4,32 +4,33 @@
         <img id="imglist" src="{{joke.userId.image}}">
         <h3 class="mb-0"><a class="usersFont" href="/profile/{{joke.userId.id}}">{{{joke.userId.username}}}</a></h3>
         -
-        <p class="mb-0">{{joke.created_at}}</p>
+        <p class="mb-0">{{formatDate joke.created_at}}</p>
     </div>
     <hr>
     {{/if}}
     <p class="ml">"{{{joke.body}}}"</p>
     <div class="row scores">
         {{#if joke.rates}}
-        <div class="col-md-3"><span> Avg. score: <b>{{joke.rateAvg}}</b></span></div>
+        <div class="col-md-3"><span> Avg. score: <b class="rateAvg">{{joke.rateAvg}}</b></span></div>
         {{else}}
-        <div class="col-md-12"><span><i>Not scored</i></span></div>
+        <div class="col-md-12"><span>Avg. score: <b class="rateAvg"><i>Not scored</i></b></span></div>
         {{/if}}
-        {{#if joke.isRated}}
-        <div class="col-md-3"><span>Your score: <b>{{joke.isRated}}</b></span></div>
-        {{else}}
+        {{!-- {{#if joke.isRated}} --}}
         {{#unless joke.isOwner}}
+        <div class="col-md-3">
+            <span>Your score: <b class="rate">{{joke.isRated}}</b>
+            <div class="rateStars" data-rate="{{joke.isRated}}" data-joke-id="{{joke.id}}"></div>
+            </span>
+        </div>
+        {{!-- {{else}} --}}
         {{#if user}}
         <div class="col-md-12 mt-2">
-            <form action="/rate/{{joke.id}}" method="POST">
-                <input type="number" name="rate" value="1" min="1" max="5">
-                <button class="btn btn-primary btn-sm" type="submit">Rate it</button>
-            </form>
+            
         </div>
     </div>
     {{/if}}
     {{/unless}}
-    {{/if}}
+    {{!-- {{/if}} --}}
     {{#if joke.isOwner}}
     <div class="what">
         <a class="btn btn-primary btn-sm" href="/jokes/edit/{{joke._id}}">Edit</a>
