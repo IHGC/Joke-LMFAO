@@ -8,27 +8,25 @@
     </div>
     <hr>
     {{/if}}
-
     <p class="ml">"{{{joke.body}}}"</p>
     <div class="row scores">
         {{#if joke.rates}}
-        <div class="col-md-2"><span> Avg. score: <b>{{joke.rateAvg}}</b></span></div>
+        <div class="col-md-3"><span> Avg. score: <b>{{joke.rateAvg}}</b></span></div>
         {{else}}
         <div class="col-md-12"><span><i>Not scored</i></span></div>
         {{/if}}
         {{#if joke.isRated}}
-        <div class="col-md-2"><span>Your score: <b>{{joke.isRated}}</b></span></div>
- 
-    {{else}}
-    {{#unless joke.isOwner}}
-    {{#if user}}
-    <div class="col-md-12 mt-2">
-    <form action="/rate/{{joke.id}}" method="POST">
-        <input type="number" name="rate" value="1" min="1" max="5">
-        <button class="btn btn-primary btn-sm" type="submit">Rate it</button>
-    </form>
+        <div class="col-md-3"><span>Your score: <b>{{joke.isRated}}</b></span></div>
+        {{else}}
+        {{#unless joke.isOwner}}
+        {{#if user}}
+        <div class="col-md-12 mt-2">
+            <form action="/rate/{{joke.id}}" method="POST">
+                <input type="number" name="rate" value="1" min="1" max="5">
+                <button class="btn btn-primary btn-sm" type="submit">Rate it</button>
+            </form>
+        </div>
     </div>
-     </div>
     {{/if}}
     {{/unless}}
     {{/if}}

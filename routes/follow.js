@@ -10,7 +10,11 @@ router.get("/following", (req, res, next) => {
     .populate("followedId")
     .then(users => {
       users = users.map(u => u.followedId);
-      res.render("follow", { following: true, users });
+      let mmm;
+      if(users.length==0){
+        mmm=true;
+      }
+      res.render("follow", { following: true, users,mmm });
     })
     .catch(e => next(e));
 });
@@ -30,7 +34,11 @@ router.get("/followed", (req, res, next) => {
     .populate("followerId")
     .then(users => {
       users = users.map(u => u.followerId);
-      res.render("follow", { following: false, users });
+      let okay;
+      if(users.length==0){
+        okay=true;
+      }
+      res.render("follow", { following: false, users, okay });
     })
     .catch(e => next(e));
 });

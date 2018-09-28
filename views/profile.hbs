@@ -1,9 +1,13 @@
-<h1 class="display-5">Chistes más recientes!</h1>
+<h1 class="display-5">Followers jokes!</h1>
 {{#if jokes}}
 {{#each jokes}}
 {{> _jokesList joke=this user=../user}}
 {{/each}}
 {{else}}
-<p>Comienza a seguir a gente para ver chistes!</p>
+<div class="mt-5">
+<img src="/images/what.png">
+<br><br>
+<h5>You dont follow anybode!</h5>
+</div>
 {{/if}}
 

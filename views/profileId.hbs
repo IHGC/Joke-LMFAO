@@ -1,24 +1,26 @@
-<div class="profile">
+<div class="profile row">
+<div class="col-md-4">
+<img class="profileImg" style="width:50px;height:50px; margin-left:10px;" src="{{us.image}}">
+<h3 style="display:inline" class="usersFont ml-2">{{us.username}}</h3>
 {{#if user}}
 {{#if check}}
-<a href="/follow/{{us.id}}">Seguir</a>
+<a class="btn btn-primary btn-sm ml-3 mb-2" href="/follow/{{us.id}}">Follow</a>
 {{else}}
-<a href="/follow/{{us.id}}/delete">Dejar Seguir</a>
+<a class="btn btn-primary btn-sm ml-3 mb-2" href="/follow/{{us.id}}/delete">Unfollow</a>
 {{/if}}
 {{/if}}
-<h3 style="display:inline">{{us.username}}</h3>
-<img class="profileImg" src="{{us.image}}">
-<p style="display:inline">Seguidos:{{following.length}}</p>
-
--
-
-<p style="display:inline">Seguidores:{{followers.length}}</p>
+</div>
+<div class="col-md-4">
+<p>Follows: <b>{{following.length}} </b></p>
+<p>Followers: <b>{{followers.length}} </b></p>
+</div>
 </div>
 {{#if jokes}}
 {{#each jokes}}
 {{> _jokesList joke=this user=../user}}
 {{/each}}
 {{else}}
-<p>Aún no tiene chistes</p>
+<p>No jokes yet</p>
+<img src="" alt="" srcset="">
 {{/if}}
 

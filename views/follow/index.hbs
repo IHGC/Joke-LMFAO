@@ -3,7 +3,12 @@
 {{else}}
 <p class="nav-link">{{user.username}}, your have {{users.length}} followers</p>
 {{/if}}
-
+{{#if okay}}
+<img style="width:30%;margin-top:-5%;" src="../images/okay.png">
+{{/if}}
+{{#if mmm}}
+<img style="width:30%;" src="../images/mmmm.png">
+{{/if}}
 
 {{#each users as |user| }}
 <blockquote class="blockquote text-center">

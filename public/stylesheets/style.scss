@@ -36,9 +36,13 @@ img{
 }
 
 .profile{
-    margin-top:1%;
-    text-align:center;
+    width:80%;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+   
 }
+
 .row{
     text-align:center;
 }
@@ -167,6 +171,16 @@ u{
 .lala{
     position:fixed;
 }
+.profileSettings{
+    width:50%;
+    margin:2.5% auto;
+}
+.uploadImage{
+    border:1px solid rgb(238, 237, 237);
+    width:100%;
+}
+
+
 
 
 
@@ -180,6 +194,7 @@ u{
 }
 .lolo{
     position:relative;
+    width:100%;
 }
 .lala{
     position:relative;
