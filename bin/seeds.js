@@ -33,26 +33,36 @@ let users = [
   {
     username: "alice",
     email: "alice@alice",
+    followers:0,
+    following:1,
     password: bcrypt.hashSync("alice", bcrypt.genSaltSync(bcryptSalt))
   },
   {
     username: "bob",
     email: "bob@bob",
+    followers:2,
+    following:1,
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt))
   },
   {
     username: "carl",
     email: "carl@carl",
+    followers:2,
+    following:2,
     password: bcrypt.hashSync("carl", bcrypt.genSaltSync(bcryptSalt))
   },
   {
     username: "dave",
     email: "dave@dave",
+    followers:2,
+    following:1,
     password: bcrypt.hashSync("dave", bcrypt.genSaltSync(bcryptSalt))
   },
   {
     username: "edd",
     email: "edd@edd",
+    followers:0,
+    following:1,
     password: bcrypt.hashSync("edd", bcrypt.genSaltSync(bcryptSalt))
   }
 ];

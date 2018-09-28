@@ -18,7 +18,7 @@ router.get('/', ensureLoggedOut("/profile"),(req, res, next) => {
   })
 });
 
-router.get("/profile", (req,res)=>{
+router.get("/profile",ensureLoggedIn(), (req,res)=>{
   user=req.user;
   Follow.find({ followerId: user.id }).then(users => {
     if (users.length == 0) {
@@ -38,11 +38,11 @@ router.get("/profile", (req,res)=>{
   })
 })
 
-router.get("/profile/edit",ensureLoggedIn('/auth/login'),(req,res,next)=>{
+router.get("/profile/edit",ensureLoggedIn(),(req,res,next)=>{
   res.render('user/profile',{user:req.user, message: req.flash("error")})
 })
 //uploadCloud.single('image'),
-router.post("/profile/edit",ensureLoggedIn('/auth/login'),uploadCloud.single('image'),(req,res,next)=>{
+router.post("/profile/edit",ensureLoggedIn(),uploadCloud.single('image'),(req,res,next)=>{
   console.log(req.body,req.params,req.query)
   const {username,email,oldPassword,password,password2}=req.body
   const image = req.file
@@ -51,8 +51,6 @@ router.post("/profile/edit",ensureLoggedIn('/auth/login'),uploadCloud.single('im
   const update={}
   const bcryptSalt=10
   const salt = bcrypt.genSaltSync(bcryptSalt);
-  console.log(username,email,password,password2,image)
-  console.log(userId)
   User.findById(userId)
   .then(user=>{
     if(password||password2){
@@ -114,6 +112,7 @@ router.post("/profile/edit",ensureLoggedIn('/auth/login'),uploadCloud.single('im
 router.get("/profile/:id",(req,res)=>{
   Joke.find({userId:req.params.id})
   .then(jokes=>{
+    if(!jokes.length)res.redirect('/profile')
     User.findById(req.params.id)
     .then(us=>{
       Follow.find({followerId: req.params.id})

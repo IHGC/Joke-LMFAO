@@ -11,7 +11,7 @@ const path         = require('path');
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
-    
+const moment = require("moment")
 
 mongoose
   .connect(process.env.URL_DB, {useNewUrlParser: true})
@@ -59,6 +59,9 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   }
 });
 
+hbs.registerHelper('formatDate',(date)=>{
+  return moment(date).format("YYYY-MM-DD HH:mm")
+})
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 

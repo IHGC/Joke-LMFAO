@@ -24,10 +24,9 @@ router.post("/", (req, res, next) => {
         jokes=isOwner(jokes,req.user.id)
       }
       jokes=addMarkTag(jokes,search)
-
       res.render("search", { jokes, search });
     });
-  })
+  });
 });
 
 module.exports = router;

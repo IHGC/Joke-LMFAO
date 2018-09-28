@@ -10,7 +10,8 @@ const bcryptSalt = 10;
 
 
 router.get("/login",ensureLoggedOut("/profile"), (req, res, next) => {
-  res.render("auth/login", { "message": req.flash("error") });
+  let login=true;
+  res.render("auth/login", { "message": req.flash("error"),login });
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -21,7 +22,8 @@ router.post("/login", passport.authenticate("local", {
 }));
 
 router.get("/signup",ensureLoggedOut("/profile"), (req, res, next) => {
-  res.render("auth/signup");
+  let login=true;
+  res.render("auth/signup",{login});
 });
 
 router.post("/signup", (req, res, next) => {
