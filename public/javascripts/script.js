@@ -1,8 +1,8 @@
   $('.rateStars').rateYo({
     starWidth: "28px",
     normalFill: "gray",
-    ratedFill: "#f39c12",
-    precision: .5,
+    ratedFill: "black",
+    precision: .1  ,
     maxValue: 5,
     minValue: 0,
     rating: this.dataset||0
