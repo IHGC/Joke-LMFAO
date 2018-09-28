@@ -17,6 +17,7 @@ img{
     width: 100px;
     height:100px;
     margin-bottom:20px;
+    border:2px solid black;
 }
 .flex{
     display:flex;
@@ -67,6 +68,7 @@ u{
     margin-right:10px;
     width:40px;
     height:40px;
+    border:1px solid black;
 }
 
 .mb-0{
@@ -80,7 +82,7 @@ u{
     display:inline;
 }
 .mybar{
-    z-index:11;
+    z-index:15;
     width:100%;
     position:fixed;
     font-size:2.5vh;
