@@ -1,0 +1,14 @@
+{{#if user}}
+{{#if check}}
+<a href="/follow/{{us.id}}">Seguir</a>
+{{else}}
+<a href="/follow/{{us.id}}/delete">Dejar Seguir</a>
+{{/if}}
+{{/if}}
+<a href="/profile/{{us.id}}"><h3 style="display:inline">{{us.username}}</h3></a>
+<img id="profileImg" src="{{us.image}}">
+<p style="display:inline">Seguidos: {{us.following}}</p>
+
+-
+
+<p style="display:inline">Seguidores: {{us.followers}}</p>

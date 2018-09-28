@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Follow = require("../models/Follow");
 const FollowList = require("../models/FollowList");
+const User = require("../models/User");
+const {ensureLoggedOut,ensureLoggedIn} = require ("../middlewares/ensureLoggedIn")
 
 /* GET home page */
 // lista a quien sigues
@@ -45,25 +47,37 @@ router.get("/followed/:id", (req, res, next) => {
     .catch(e => next(e));
 });
 
-router.get("/follow/:id",(req,res,next)=>{
+router.get("/follow/:id",ensureLoggedIn(),(req,res,next)=>{
   const followedId=req.params.id
   const followerId=req.user.id
   Follow.create({followerId,followedId})
-  .then((f)=>{
-    res.redirect(req.get('referer'));
+  .then(()=>{
+    User.findByIdAndUpdate(followerId,{$inc:{following:1}})
+    .then(()=>{
+      User.findByIdAndUpdate(followedId,{$inc:{followers:1}})
+      .then(()=>{
+        res.redirect(req.get('referer'));
+      }).catch(e=>next(e))
+    }).catch(e=>next(e))
   }).catch(e=>next(e))
 })
 
-router.get("/follow/:id/delete",(req,res,next)=>{
+router.get("/follow/:id/delete",ensureLoggedIn(),(req,res,next)=>{
   const followedId=req.params.id
   const followerId=req.user.id
   Follow.findOneAndDelete({$and:[{followerId},{followedId}]})
   .then(()=>{
-    res.redirect(req.get('referer'));
+    User.findByIdAndUpdate(followerId,{$inc:{following:-1}})
+    .then(()=>{
+      User.findByIdAndUpdate(followedId,{$inc:{followers:-1}})
+      .then(()=>{
+         res.redirect(req.get('referer'));
+      }).catch(e=>next(e))
+    }).catch(e=>next(e))
   }).catch(e=>next(e))
 })
 
-router.get("/followList/:id",(req,res,next)=>{
+router.get("/followList/:id",ensureLoggedIn(),(req,res,next)=>{
   const followedListId=req.params.id
   const followerId=req.user.id
   FollowList.create({followerId,followedListId})
@@ -72,7 +86,7 @@ router.get("/followList/:id",(req,res,next)=>{
   }).catch(e=>next(e))
 })
 
-router.get("/followList/:id/delete",(req,res,next)=>{
+router.get("/followList/:id/delete",ensureLoggedIn(),(req,res,next)=>{
   const followedListId=req.params.id
   const followerId=req.user.id
   FollowList.findOneAndDelete({$and:[{followerId},{followedListId}]})

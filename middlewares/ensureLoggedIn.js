@@ -2,7 +2,7 @@ const ensureLoggedIn = (redirectTo) => (req, res, next) => {
     if (req.user) {
       next();
     } else {
-      res.redirect(redirectTo);
+      res.redirect(redirectTo||"/auth/login");
     }
   };
 
@@ -10,7 +10,7 @@ const ensureLoggedIn = (redirectTo) => (req, res, next) => {
     if (!req.user) {
       next();
     } else {
-      res.redirect(redirectTo);
+      res.redirect(redirectTo||"/auth/login");
     }
   };
 

@@ -5,24 +5,36 @@ const Joke = require("../models/Joke");
 router.post("/:id", (req, res, next) => {
   const userId = req.user.id
   const rate = parseInt(req.body.rate)
+  console.log(rate)
   const jokeId = req.params.id
-  console.log("prueba",{rates:{$push:{userId,rate}}})
-  Joke.findOneAndUpdate({_id:jokeId},{$push:{rates:{rate,userId}}})
-    .then(joke => {
-      console.log("joke",joke.rates)
-      let tot=rate
+  Joke.findOne({$and:[{_id:jokeId},{"rates.userId":userId}]})
+  .then(joke=>{
+    if(joke){
+      return Joke.findOneAndUpdate({$and:[{_id:jokeId},{"rates.userId":userId}]},{$set:{"rates.$.rate":rate}})
+    }else{
+      return Joke.findOneAndUpdate({_id:jokeId},{$push:{rates:{rate,userId}}})
+    }
+  })
+  .then(joke=>{
+    Joke.findById(jokeId)
+    .then(joke=>{
+      console.log(joke)
+      console.log(rate)
+      let tot=0
       for(let i=0;i<joke.rates.length;i++){
-        console.log("rate",i,joke.rates[i].rate)
         tot+=parseInt(joke.rates[i].rate)
       }
-      console.log(tot,joke.rates.length+1)
-      let rateAvg=tot/(joke.rates.length+1)
-      console.log(rateAvg)
+      console.log(tot,joke.rates.length)
+      let rateAvg=(tot/joke.rates.length) //  .toFixed(2)
       Joke.findOneAndUpdate({_id:jokeId},{rateAvg})
-      .then(()=>res.redirect(req.get('referer')))
-      .catch(e => next(e));
-    })
-    .catch(e => next(e));
+        .then((joke)=>{
+          res.json({status:"ok",rate:rateAvg})
+        })
+        .catch(e => {
+          res.json({status:"error",error:e})
+        });
+    })    
+  }).catch(e => next(e));
 });
 
 router.post("/:id/delete", (req, res, next) => {
