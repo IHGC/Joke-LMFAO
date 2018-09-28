@@ -1,11 +1,12 @@
-<div class="profile">
-  {{>_user}}
+<div class="profile row">
+   {{>_user}}
 </div>
 {{#if jokes}}
 {{#each jokes}}
 {{> _jokesList joke=this user=../user}}
 {{/each}}
 {{else}}
-<p>Aún no tiene chistes</p>
+<p>No jokes yet</p>
+<img src="" alt="" srcset="">
 {{/if}}
 

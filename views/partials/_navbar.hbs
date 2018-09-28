@@ -1,39 +1,35 @@
-<nav class="navbar navbar-expand navbar-light bg-light ">
-  <div class="collapse navbar-collapse" id="navbarNav">
-    {{#if user}}
-    <a class="navbar-brand" href="/profile">Joke LMFAO</a>
-    {{else}}
-    <a class="navbar-brand" href="/">Joke LMFAO</a>
-    {{/if}}
-    <ul class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark mybar">
+  <img style="width:40px" class="mr-2" src="../images/LOOOL.png">
+  {{#if user}}
+  <a class="navbar-brand" href="/profile">Joke LMFAO!</a>
+  {{else}}
+   <a class="navbar-brand" href="/">Joke LMFAO!</a>
+ {{/if}} 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <form action="/search" method="POST">
-          <input type="search" name="search" placeholder="Search">
-          <button type="submit">Search</button>
-        </form>
+        <a class="nav-link" href="/ranking">Top 10</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link active" href="/ranking">Top 10</a>
+        <a class="nav-link" href="/explore">Explore</a>
       </li>
-      <li class="nav-item">
-      <a class="nav-link active" href="/explore">Explorar chistes</a>
-      </li>
-       {{#if user}}
-      <li class="nav-item">
-        <a class="nav-link active" href="/profile">Welcome {{user.username}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/logout">Log out</a>
-      </li>
-      {{else}}
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/login">Log in</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/signup">Register</a>
-      </li>
-      {{/if}}
     </ul>
+      <img style="width:50px" class="mr-2" src="../images/ffff.png">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    {{#if user}}
+          <a class="nav-link disabled" href="/profile">Welcome {{user.username}}!</a>
+         {{else}}
+         <a class="nav-link disabled" href="/auth/login">Log in</a>
+         <a class="nav-link disabled" href="/auth/signup">Sign up</a>
+          {{/if}}
   </div>
-
 </nav>
+
+
+

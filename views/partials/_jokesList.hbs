@@ -1,35 +1,40 @@
 <blockquote class="blockquote">
     {{#if joke.userId.username}}
     <div>
-    <img id="imglist" src="{{joke.userId.image}}">
-    <h3 class="mb-0"><a style="text-decoration: underline" href="/profile/{{joke.userId.id}}">{{{joke.userId.username}}}</a></h3>
-    <p class="mb-0">{{joke.created_at}}</p>
+        <img id="imglist" src="{{joke.userId.image}}">
+        <h3 class="mb-0"><a class="usersFont" href="/profile/{{joke.userId.id}}">{{{joke.userId.username}}}</a></h3>
+        -
+        <p class="mb-0">{{joke.created_at}}</p>
     </div>
+    <hr>
     {{/if}}
-    <p class="mb-0">{{{joke.body}}}</p>
-    <p class="mb-0">
+    <p class="ml">"{{{joke.body}}}"</p>
+    <div class="row scores">
         {{#if joke.rates}}
-            <p style="text-align:center">{{joke.rateAvg}}</p>
+        <div class="col-md-3"><span> Avg. score: <b>{{joke.rateAvg}}</b></span></div>
         {{else}}
-           <p style="text-align:center">Sin puntuar</p> 
+        <div class="col-md-12"><span><i>Not scored</i></span></div>
         {{/if}}
         {{#if joke.isRated}}
-           <p style="text-align:center">{{joke.isRated}}</p> 
+        <div class="col-md-3"><span>Your score: <b>{{joke.isRated}}</b></span></div>
         {{else}}
-            {{#unless joke.isOwner}}
-                {{#if user}}
-                    <form action="/rate/{{joke.id}}" method="POST">
-                        <input type="number" name="rate" value="1" min="1" max="5">
-                        <button type="submit">Rate it</button>
-                    </form>
-                {{/if}}
-            {{/unless}}
-        {{/if}}
-        {{#if joke.isOwner}}
-        <br>
-            <a href="/jokes/edit/{{joke._id}}">Edit</a>
-            -
-            <a href="/jokes/delete/{{joke._id}}">Delete</a>
-        {{/if}}
-    </p>
+        {{#unless joke.isOwner}}
+        {{#if user}}
+        <div class="col-md-12 mt-2">
+            <form action="/rate/{{joke.id}}" method="POST">
+                <input type="number" name="rate" value="1" min="1" max="5">
+                <button class="btn btn-primary btn-sm" type="submit">Rate it</button>
+            </form>
+        </div>
+    </div>
+    {{/if}}
+    {{/unless}}
+    {{/if}}
+    {{#if joke.isOwner}}
+    <div class="what">
+        <a class="btn btn-primary btn-sm" href="/jokes/edit/{{joke._id}}">Edit</a>
+        -
+        <a class="btn btn-primary btn-sm" href="/jokes/delete/{{joke._id}}">Delete</a>
+    </div>
+    {{/if}}
 </blockquote>

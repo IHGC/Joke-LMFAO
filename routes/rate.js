@@ -7,6 +7,7 @@ router.post("/:id", (req, res, next) => {
   const rate = parseInt(req.body.rate)
   console.log(rate)
   const jokeId = req.params.id
+<<<<<<< HEAD
   Joke.findOne({$and:[{_id:jokeId},{"rates.userId":userId}]})
   .then(joke=>{
     if(joke){
@@ -26,6 +27,17 @@ router.post("/:id", (req, res, next) => {
       }
       console.log(tot,joke.rates.length)
       let rateAvg=(tot/joke.rates.length) //  .toFixed(2)
+=======
+  console.log("prueba",{rates:{$push:{userId,rate}}})
+  Joke.findOneAndUpdate({_id:jokeId},{$push:{rates:{rate,userId}}})
+    .then(joke => {
+      let tot=rate
+      for(let i=0;i<joke.rates.length;i++){
+        tot+=parseInt(joke.rates[i].rate)
+      }
+      let rateAvg=(tot/(joke.rates.length+1)).toFixed(2)
+      
+>>>>>>> 54b0bd5c380531f3a3d87ea7eca5dd6908c45063
       Joke.findOneAndUpdate({_id:jokeId},{rateAvg})
         .then((joke)=>{
           res.json({status:"ok",rate:rateAvg})

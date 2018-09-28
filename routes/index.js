@@ -51,8 +51,6 @@ router.post("/profile/edit",ensureLoggedIn(),uploadCloud.single('image'),(req,re
   const update={}
   const bcryptSalt=10
   const salt = bcrypt.genSaltSync(bcryptSalt);
-  console.log(username,email,password,password2,image)
-  console.log(userId)
   User.findById(userId)
   .then(user=>{
     if(password||password2){
