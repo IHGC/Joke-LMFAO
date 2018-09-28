@@ -25,7 +25,7 @@ router.post("/:id", (req, res, next) => {
         tot+=parseInt(joke.rates[i].rate)
       }
       console.log(tot,joke.rates.length)
-      let rateAvg=(tot/joke.rates.length) //  .toFixed(2)
+      let rateAvg=(tot/joke.rates.length).toFixed(2)
       Joke.findOneAndUpdate({_id:jokeId},{rateAvg})
         .then((joke)=>{
           res.json({status:"ok",rate:rateAvg})

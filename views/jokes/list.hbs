@@ -1,5 +1,13 @@
 <h1 class="display-5">Your jokes</h1>
+{{#if jokes}}
 {{#each jokes}}
 {{> _jokesList joke=this user=../user}}
 {{/each}}
+{{else}}
+<div class="mt-5">
+<img style="width:20%;" src="/images/Poker_Face.png">
+<br><br>
+<h5>Add some jokes!</h5>
+</div>
+{{/if}}
 </div>
