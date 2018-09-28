@@ -63,7 +63,7 @@ hbs.registerHelper('formatDate',(date)=>{
   return moment(date).format("YYYY-MM-DD HH:mm")
 })
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Joke LMFAO!';
 
 
 // Enable authentication using session + passport
