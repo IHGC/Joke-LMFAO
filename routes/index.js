@@ -110,9 +110,9 @@ router.post("/profile/edit",ensureLoggedIn(),uploadCloud.single('image'),(req,re
 })
 
 router.get("/profile/:id",(req,res)=>{
+  if(req.params.id===req.user.id) res.redirect("/jokes/list");
   Joke.find({userId:req.params.id})
   .then(jokes=>{
-    if(!jokes.length)res.redirect('/profile')
     User.findById(req.params.id)
     .then(us=>{
       Follow.find({followerId: req.params.id})

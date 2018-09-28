@@ -71,7 +71,7 @@ u {
   display: inline; }
 
 .mybar {
-  z-index: 1;
+  z-index: 11;
   width: 100%;
   position: fixed;
   font-size: 2.5vh; }
